@@ -1,17 +1,37 @@
 package com.example.todolist.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 
 @Entity
-@Getter @Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "Todo")
+@AllArgsConstructor
 public class Todo {
-    @Id
+    @Id  // PK 매핑
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "todo_id")
     private Long id;
-    private String name;
-    private String list;
+
+    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = Member.class)   // 관계매핑을 위한 어노테이션
+    @JoinColumn(name = "member_id", updatable = false)
+    private Member member;
+
+    @Column(columnDefinition = "TEXT")
+    private String list;    // private Member member; 방법
+    @Column(nullable = false)
     private boolean check;
+
+    @Builder
+    public Todo(Member member, String list, boolean check) {
+        this.member = member;
+        this.list = list;
+        this.check = check;
+    }
+
+
+
 }
