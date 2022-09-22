@@ -21,14 +21,14 @@ public class Todo {
     private Member member;
 
     @Column(columnDefinition = "TEXT")
-    private String list;    // private Member member; 방법
+    private String contents;    // private Member member; 방법
     @Column(nullable = false)
     private boolean check;
 
     @Builder
-    public Todo(Member member, String list, boolean check) {
+    public Todo(Member member, String contents, boolean check) {
         this.member = member;
-        this.list = list;
+        this.contents = contents;
         this.check = check;
     }
 
