@@ -15,14 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     //DI 생성자 주입
-    AuthService authService;
+    private final AuthService authService;
+
+    @Autowired
+    public AuthController(AuthService authService){
+        this.authService = authService;
+    }
 
     @PostMapping("/auth/register")
     public ResponseEntity<RegisterResponse> register(
             @RequestBody RegisterRequest req
     ) {
         RegisterResponse res = authService.register(req);
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(res);   // 호출하는 authService에 di 주입해줘야함
 
     }
 
