@@ -1,8 +1,5 @@
-package com.example.todolist.Dto;
+package com.example.todolist.dto;
 
-import com.example.todolist.domain.Member;
-import com.example.todolist.domain.Todo;
-import lombok.Builder;
 import lombok.Data;
 
 @Data
