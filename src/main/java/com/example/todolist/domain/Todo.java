@@ -31,6 +31,11 @@ public class Todo {
         this.flag = flag;
     }
 
+    public void update(String contents, Boolean flag){
+        this.contents = contents;
+        this.flag = flag;
+    }
+
 
 
 }
