@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 public class TodoUpdateRequestDto {
     private String contents;    // id 추가해야하나...?
     private boolean flag;
-
 }

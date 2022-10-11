@@ -27,4 +27,8 @@ public class Member {
         this.password = password;
         this.nickname = nickname;
     }
+
+    public boolean validPassword(String password) {
+        return this.getPassword().equals(password);
+    }
 }

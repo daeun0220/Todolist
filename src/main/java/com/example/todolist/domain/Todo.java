@@ -1,5 +1,6 @@
 package com.example.todolist.domain;
 
+import com.example.todolist.dto.TodoUpdateRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,11 +32,14 @@ public class Todo {
         this.flag = flag;
     }
 
-    public void update(String contents, Boolean flag){
-        this.contents = contents;
-        this.flag = flag;
+    public void update(TodoUpdateRequestDto dto) {
+        this.contents = dto.getContents();
+        this.flag = dto.isFlag();
     }
 
+    public void flagupdate(Boolean flag) {
+        this.flag = flag;
+    }
 
 
 }

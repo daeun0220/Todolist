@@ -1,14 +1,17 @@
 package com.example.todolist.controller;
 
+import com.example.todolist.dto.LoginResponse;
+import com.example.todolist.dto.LoginRequest;
 import com.example.todolist.dto.RegisterRequest;
 import com.example.todolist.dto.RegisterResponse;
-import com.example.todolist.service.AuthService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.todolist.service.AuthService;
 
 @RestController
 @RequestMapping("/auth")
@@ -18,11 +21,11 @@ public class AuthController {
     private final AuthService authService;
 
     @Autowired
-    public AuthController(AuthService authService){
+    public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
-    @PostMapping("/auth/register")
+    @PostMapping("/register")
     public ResponseEntity<RegisterResponse> register(
             @RequestBody RegisterRequest req
     ) {
@@ -30,5 +33,13 @@ public class AuthController {
         return ResponseEntity.ok(res);   // 호출하는 authService에 di 주입해줘야함
 
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest req) {
+        LoginResponse res = authService.login(req);
+        return ResponseEntity.ok(res);
+    }
+
+
 
 }
