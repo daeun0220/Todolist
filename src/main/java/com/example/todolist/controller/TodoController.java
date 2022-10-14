@@ -40,7 +40,7 @@ public class TodoController {
      *  사용자에게 돌려줘야하는데이터 : [{ .. }, { .. }]
      */
     // 회원 별 조회
-    @GetMapping("/todo/member/{member_id}")
+    @GetMapping("/todo/member/{member_id}")   //이름 membercontroller에 담자
     public List<TodoMemberResponseDto> searchByMember(@PathVariable("member_id") Long memberId) {
        return todoService.searchByMember(memberId);
     }
@@ -56,16 +56,12 @@ public class TodoController {
         todoService.delete(id);
     }
 
-    ///@PatchMapping("/todo/flag/{id}")     // check 수정 .. api 다르게 만들기
-    ///public Long flagUpdate(@PathVariable Long id, @RequestBody TodoFlagupdateRequestDto flagrequestDto) {
-    ///   return todoService.flagupdate(id, flagrequestDto);
-    ///}
+    @PatchMapping("/todo/flag/{id}")     // check 수정 .. api 다르게 만들기
+    public Long flagUpdate(@PathVariable Long id, @RequestBody TodoFlagUpdateRequestDto flagRequestDto) {
+        return todoService.flagUpdate(id, flagRequestDto);
+    }
 
-    // 사용자가 로그인 시 nickname, email 정보를 불러올 수 있다.
-    //@GetMapping("/todo/{id}")     // 개별조회
-    //public MemberResponseDto searchById(@PathVariable Long id) {
-    //    return todoService.searchById(id);
-    //}
+
 }
 
 

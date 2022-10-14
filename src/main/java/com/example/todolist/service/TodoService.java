@@ -68,14 +68,15 @@ public class TodoService {
         todoRepository.delete(todo); // JpaRepository 에서 delete, findById 메소드 지원한다.
     }
 
-    ///@Transactional  // check 수정
-    ///public Long flagupdate(Long id, TodoFlagupdateRequestDto flagrequestDto) {
-    ///    Todo todo = todoRepository.findById(id)
-    ///            .orElseThrow(() -> new
-    ///                    IllegalArgumentException(("Todo 목록이 존재하지 않습니다.")));
-    ///    todo.flagupdate(flagrequestDto.isFlag());
+    @Transactional  // check 수정
+    public Long flagUpdate(Long id, TodoFlagUpdateRequestDto flagRequestDto) {
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new
+                        IllegalArgumentException(("Todo 목록이 존재하지 않습니다.")));
 
-    ///   return id;
-    ///}
+        todo.flagUpdate(flagRequestDto.isFlag());
+
+       return id;
+    }
 
 }

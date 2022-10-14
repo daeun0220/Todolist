@@ -37,9 +37,8 @@ public class Todo {
         this.flag = dto.isFlag();
     }
 
-    //public void flagupdate(Boolean flag) {
-    //    this.flag = flag;
-    //}
-
+    public void flagUpdate(boolean flag) {
+        this.flag = flag;
+    }
 
 }
