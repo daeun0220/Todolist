@@ -44,12 +44,12 @@ public class TodoService {
 
     // 회원 별 조회  (로그인 하고)
     @Transactional
-    public TodoMemberResponseDto searchByMember(TodoMemberResponseDto responseDto) {        // jpa 에 추가해줘야하나..
-        Optional<Member> member = memberRepository.findById(responseDto.getMemberId());
-        /// Todo todo = todoRepository.findByMember().orElseThrow(()    // optional orElseThrow()
-        ///        -> new IllegalArgumentException("해당 Todo 목록이 존재하지 않습니다. "));
-        return new TodoMemberResponseDto();
+    public List<TodoMemberResponseDto> searchByMember(Long memberId) {        // jpa 에 추가해줘야하나..
+        return todoRepository.findByMember(memberId).stream()
+                .map(TodoMemberResponseDto::new)
+                .collect(Collectors.toList());
     }
+
 
 
     @Transactional    //수정

@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
-                .excludePathPatterns("/auth/**");
+                .excludePathPatterns("/auth/**");   // 전체 조회도 빼야겠다
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }
