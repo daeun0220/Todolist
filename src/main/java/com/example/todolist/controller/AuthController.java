@@ -18,7 +18,7 @@ import com.example.todolist.service.AuthService;
 public class AuthController {
 
     //DI 생성자 주입
-    private final AuthService authService;
+    private final AuthService authService;  // 생성자 주입 대신 해주는 룸복이 @RequiredArgsConstructor 이다
 
     @Autowired
     public AuthController(AuthService authService) {

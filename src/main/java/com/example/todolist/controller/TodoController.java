@@ -28,6 +28,11 @@ public class TodoController {
         return todoService.searchById(id);
     }
 
+    @GetMapping("/member/{member_id}")     // 사용자 정보조회
+    public MemberResponseDto searchByMemberId(@PathVariable("member_id") Long memberId) {
+        return todoService.searchByMemberId(memberId);
+    }
+
 
     @GetMapping("/todo")   // 전체조회
     public List<TodoListResponseDto> searchAllDesc() {

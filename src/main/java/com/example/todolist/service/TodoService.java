@@ -42,7 +42,7 @@ public class TodoService {
         return todoRepository.findAllByOrderByIdDesc().stream().map(TodoListResponseDto::new).collect(Collectors.toList());
     }
 
-    // 회원 별 조회  (로그인 하고)
+    // 회원 별 조회
     @Transactional
     public List<TodoMemberResponseDto> searchByMember(Long memberId) {        // jpa 에 추가해줘야하나..
         return todoRepository.findByMember(memberId).stream()
@@ -78,5 +78,15 @@ public class TodoService {
 
        return id;
     }
+    @Transactional
+    public MemberResponseDto searchByMemberId(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new IllegalArgumentException("해당 아이디가 존재하지 않습니다."));
+        return new MemberResponseDto(member);
+
+    }
+
+
+    // memberId 로 사용자 정보 (nickname, email) 불러오기
 
 }
