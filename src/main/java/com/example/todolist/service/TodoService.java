@@ -1,6 +1,7 @@
 package com.example.todolist.service;
 
 
+import com.example.todolist.Exception.NotFoundMemberException;
 import com.example.todolist.dto.*;
 import com.example.todolist.domain.Member;
 import com.example.todolist.domain.Todo;
@@ -26,7 +27,10 @@ public class TodoService {
     public Long create(TodoCreateRequestDto requestDto) {
         Optional<Member> member = memberRepository.findById(requestDto.getMemberId());
         Todo todo = Todo.builder()  // 객체 생성하는 new() 아닌 builder 방법
-                .member(member.orElseThrow()).contents(requestDto.getContents()).flag(false).build();
+                .member(member.orElseThrow())
+                .contents(requestDto.getContents())
+                .flag(false)
+                .build();
         return todoRepository.save(todo).getId();
     }
 
@@ -39,7 +43,9 @@ public class TodoService {
 
     @Transactional   //전체조회
     public List<TodoListResponseDto> searchAllDesc() {  //질문: findAllDesc 안되는이유
-        return todoRepository.findAllByOrderByIdDesc().stream().map(TodoListResponseDto::new).collect(Collectors.toList());
+        return todoRepository.findAllByOrderByIdDesc().stream()
+                .map(TodoListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     // 회원 별 조회
@@ -81,10 +87,16 @@ public class TodoService {
     @Transactional
     public MemberResponseDto searchByMemberId(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(
-                () -> new IllegalArgumentException("해당 아이디가 존재하지 않습니다."));
+                () -> new NotFoundMemberException("해당 아이디가 존재하지 않습니다."));
         return new MemberResponseDto(member);
 
     }
+
+
+
+
+
+
 
 
     // memberId 로 사용자 정보 (nickname, email) 불러오기
